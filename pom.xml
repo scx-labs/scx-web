@@ -10,20 +10,20 @@
         <relativePath/>
     </parent>
 
-    <artifactId>scx-function</artifactId>
+    <artifactId>scx-web</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>SCX Function</name>
+    <name>SCX Web</name>
     <description>
-        SCX Function
+        SCX Web
     </description>
-    <url>https://github.com/scx-projects/scx-function</url>
+    <url>https://github.com/scx-projects/scx-web</url>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/scx-projects/scx-function/blob/master/LICENSE</url>
+            <url>https://github.com/scx-projects/scx-web/blob/master/LICENSE</url>
         </license>
     </licenses>
 
@@ -36,9 +36,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/scx-projects/scx-function.git</connection>
-        <developerConnection>scm:git:https://github.com/scx-projects/scx-function.git</developerConnection>
-        <url>https://github.com/scx-projects/scx-function</url>
+        <connection>scm:git:https://github.com/scx-projects/scx-web.git</connection>
+        <developerConnection>scm:git:https://github.com/scx-projects/scx-web.git</developerConnection>
+        <url>https://github.com/scx-projects/scx-web</url>
     </scm>
 
     <build>

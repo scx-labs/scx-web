@@ -1,16 +1,14 @@
 package cool.scx.web.exception_handler;
 
-import cool.scx.common.util.ExceptionUtils;
-import cool.scx.http.exception.ScxHttpException;
-import cool.scx.http.media_type.ScxMediaType;
-import cool.scx.http.routing.RoutingContext;
-import cool.scx.http.status.ScxHttpStatus;
+import dev.scx.http.exception.ScxHttpException;
+import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.http.routing.RoutingContext;
+import dev.scx.http.status_code.ScxHttpStatusCode;
 
 import java.lang.System.Logger;
 import java.util.LinkedHashMap;
 
-import static cool.scx.http.media_type.MediaType.TEXT_HTML;
-import static cool.scx.http.status.ScxHttpStatusHelper.getReasonPhrase;
+import static dev.scx.http.media_type.MediaType.TEXT_HTML;
 import static java.lang.System.Logger.Level.ERROR;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -44,7 +42,7 @@ public class ScxHttpExceptionHandler implements ExceptionHandler {
         this.useDevelopmentErrorPage = useDevelopmentErrorPage;
     }
 
-    public static void sendToClient(ScxHttpStatus status, String info, RoutingContext routingContext) {
+    public static void sendToClient(ScxHttpStatusCode status, String info, RoutingContext routingContext) {
         //防止页面出现 null 这种奇怪的情况
         if (info == null) {
             info = "";

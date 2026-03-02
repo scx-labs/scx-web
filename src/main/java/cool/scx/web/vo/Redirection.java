@@ -1,12 +1,10 @@
 package cool.scx.web.vo;
 
-import cool.scx.http.ScxHttpServerResponse;
-import cool.scx.http.routing.RoutingContext;
-import cool.scx.http.status.ScxHttpStatus;
+import dev.scx.http.ScxHttpServerResponse;
+import dev.scx.http.routing.RoutingContext;
+import dev.scx.http.status_code.ScxHttpStatusCode;
 
-import static cool.scx.http.headers.HttpFieldName.LOCATION;
-import static cool.scx.http.status.HttpStatus.FOUND;
-import static cool.scx.http.status.HttpStatus.MOVED_PERMANENTLY;
+import static dev.scx.http.headers.HttpHeaderName.LOCATION;
 
 /// 重定向
 ///
@@ -15,9 +13,9 @@ import static cool.scx.http.status.HttpStatus.MOVED_PERMANENTLY;
 public final class Redirection implements BaseVo {
 
     private final String location;
-    private final ScxHttpStatus status;
+    private final ScxHttpStatusCode status;
 
-    private Redirection(String location, ScxHttpStatus status) {
+    private Redirection(String location, ScxHttpStatusCode status) {
         this.location = location;
         this.status = status;
     }

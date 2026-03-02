@@ -23,12 +23,12 @@ public class HttpHelper {
     public static String getRequestIP(ScxHttpServerRequest request) {
 
         var xRealIPStr = request.getHeader("X-Real-IP");
-        if (notBlank(xRealIPStr) && !"unknown".equalsIgnoreCase(xRealIPStr)) {
+        if (!xRealIPStr.isBlank() && !"unknown".equalsIgnoreCase(xRealIPStr)) {
             return xRealIPStr;
         }
 
         var xForwardedForStr = request.getHeader("X-Forwarded-For");
-        if (notBlank(xForwardedForStr) && !"unknown".equalsIgnoreCase(xForwardedForStr)) {
+        if (!xForwardedForStr.isBlank() && !"unknown".equalsIgnoreCase(xForwardedForStr)) {
             var s = xForwardedForStr.split(",");
             if (s.length > 0) {
                 return s[0];

@@ -1,7 +1,6 @@
 package cool.scx.web.vo;
 
-import cool.scx.http.routing.RoutingContext;
-import cool.scx.object.ScxObject;
+import dev.scx.http.routing.RoutingContext;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

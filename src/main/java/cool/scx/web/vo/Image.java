@@ -1,13 +1,12 @@
 package cool.scx.web.vo;
 
-import cool.scx.http.exception.BadRequestException;
-import cool.scx.http.exception.NotFoundException;
-import cool.scx.http.exception.ScxHttpException;
-import cool.scx.http.media_type.FileFormat;
-import cool.scx.http.media_type.MediaType;
-import cool.scx.http.media_type.ScxMediaType;
-import cool.scx.http.routing.RoutingContext;
-import cool.scx.http.routing.handler.StaticHelper;
+import dev.scx.http.exception.BadRequestException;
+import dev.scx.http.exception.NotFoundException;
+import dev.scx.http.exception.ScxHttpException;
+import dev.scx.http.media_type.FileFormat;
+import dev.scx.http.media_type.MediaType;
+import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.http.routing.RoutingContext;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.AbsoluteSize;
 import net.coobird.thumbnailator.geometry.Position;
@@ -21,9 +20,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import static cool.scx.http.headers.HttpFieldName.ACCEPT_RANGES;
-import static cool.scx.http.headers.HttpFieldName.CACHE_CONTROL;
-import static cool.scx.http.media_type.MediaType.IMAGE_PNG;
+import static dev.scx.http.headers.HttpHeaderName.ACCEPT_RANGES;
+import static dev.scx.http.headers.HttpHeaderName.CACHE_CONTROL;
+import static dev.scx.http.media_type.MediaType.IMAGE_PNG;
 
 /// Image
 ///

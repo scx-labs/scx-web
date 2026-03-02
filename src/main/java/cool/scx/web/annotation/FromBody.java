@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import static dev.scx.constant.AnnotationValues.NULL_STRING;
+
 /// 从 body 获取参数
 ///
 /// @author scx567888
@@ -25,7 +27,7 @@ public @interface FromBody {
     /// - useAllBody 为 true 时 :
     /// value 的值则会被忽略
     /// 整个 请求体会被转换成参数
-    String value() default NULL;
+    String value() default NULL_STRING;
 
     /// 是否必填
     boolean required() default true;

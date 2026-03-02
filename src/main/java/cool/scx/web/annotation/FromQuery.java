@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import static dev.scx.constant.AnnotationValues.NULL_STRING;
+
 /// 从 query 获取参数
 ///
 /// @author scx567888
@@ -15,7 +17,7 @@ public @interface FromQuery {
 
     /// 查询参数名称 默认为空
     /// 为空的情况下会将方法参数名称作为 查询参数名称
-    String value() default NULL;
+    String value() default NULL_STRING;
 
     /// 将 查询参数聚合
     boolean merge() default false;

@@ -93,11 +93,24 @@
             <version>${scx-websocket-x.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>dev.scx</groupId>
+            <artifactId>scx-constant</artifactId>
+            <version>${scx-constant.version}</version>
+        </dependency>
+
         <!-- todo 应该存在吗? -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.34</version>
+            <version>${freemarker.version}</version>
+        </dependency>
+
+        <!-- todo 应该存在吗? -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
         </dependency>
 
         <!-- TestNG 测试包 -->
@@ -117,6 +130,9 @@
         <scx-reflect.version>0.0.1</scx-reflect.version>
         <scx-serialize.version>0.1.0</scx-serialize.version>
         <scx-websocket-x.version>0.2.1</scx-websocket-x.version>
+        <scx-constant.version>0.0.1</scx-constant.version>
+        <freemarker.version>2.3.34</freemarker.version>
+        <thumbnailator.version>0.4.21</thumbnailator.version>
         <testng.version>7.11.0</testng.version>
 
     </properties>

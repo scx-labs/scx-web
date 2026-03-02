@@ -1,7 +1,7 @@
 package cool.scx.web.exception_handler;
 
-import cool.scx.http.exception.InternalServerErrorException;
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.exception.InternalServerErrorException;
+import dev.scx.http.routing.RoutingContext;
 
 import java.lang.System.Logger;
 

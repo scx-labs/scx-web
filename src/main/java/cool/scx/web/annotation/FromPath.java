@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import static dev.scx.constant.AnnotationValues.NULL_STRING;
+
 /// 从路径 (Path) 参数
 ///
 /// @author scx567888
@@ -15,7 +17,7 @@ public @interface FromPath {
 
     /// 路径参数名称 默认为空
     /// 为空的情况下会将参数名称作为 路径参数名称
-    String value() default NULL;
+    String value() default NULL_STRING;
 
     /// 聚合参数
     boolean merge() default false;

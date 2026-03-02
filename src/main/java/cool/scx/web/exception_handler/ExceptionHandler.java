@@ -1,6 +1,6 @@
 package cool.scx.web.exception_handler;
 
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.RoutingContext;
 
 /// 路由异常处理器
 ///

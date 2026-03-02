@@ -11,6 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import static cool.scx.web.handler.StaticHelper.sendStatic;
 import static dev.scx.http.headers.HttpHeaderName.*;
 import static dev.scx.http.method.HttpMethod.GET;
 import static dev.scx.http.method.HttpMethod.HEAD;
@@ -36,7 +37,7 @@ public class StaticHandler implements Function1Void<RoutingContext, Throwable> {
             return;
         }
 
-        var p = routingContext.pathParams().get("*");
+        var p = routingContext.pathMatch().capture("*");
         var filePath = getFilePath(p);
         var notExists = Files.notExists(filePath);
         //文件不存在
@@ -55,13 +56,13 @@ public class StaticHandler implements Function1Void<RoutingContext, Throwable> {
             var ifModifiedSince = request.getHeader("If-Modified-Since");
 
             if (etag.equals(ifNoneMatch) || lastModifiedTime.equals(ifModifiedSince)) {
-                routingContext.response().status(304).send();
+                routingContext.request().response().statusCode(304).send();
                 return;
             }
 
-            routingContext.response().setHeader(CACHE_CONTROL, "public,immutable,max-age=2628000");
-            routingContext.response().setHeader(ETAG, etag);
-            routingContext.response().setHeader(LAST_MODIFIED, lastModifiedTime);
+            routingContext.request().response().setHeader(CACHE_CONTROL, "public,immutable,max-age=2628000");
+            routingContext.request().response().setHeader(ETAG, etag);
+            routingContext.request().response().setHeader(LAST_MODIFIED, lastModifiedTime);
 
             sendStatic(filePath, routingContext);
         } catch (IOException e) {

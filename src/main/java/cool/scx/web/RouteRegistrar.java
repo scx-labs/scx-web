@@ -3,7 +3,10 @@ package cool.scx.web;
 
 import cool.scx.web.annotation.NoScxRoute;
 import cool.scx.web.annotation.ScxRoute;
+import dev.scx.collection.multi_map.MultiMap;
 import dev.scx.http.routing.Router;
+import dev.scx.http.routing.path_matcher.TemplatePathMatcher;
+import dev.scx.reflect.ClassInfo;
 import dev.scx.reflect.MethodInfo;
 import dev.scx.reflect.ScxReflect;
 
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static dev.scx.reflect.AccessModifier.PUBLIC;
 import static java.lang.System.Logger.Level.WARNING;
 
 /// 路由注册器
@@ -25,12 +29,12 @@ public final class RouteRegistrar {
 
     private static final Logger logger = System.getLogger(RouteRegistrar.class.getName());
     private static final Comparator<ScxRouteHandler> EXACT_PATH_COMPARATOR = Comparator.comparing(r -> {
-        var p = (PathMatcherImpl) r.pathMatcher();
-        return p.exactPath() ? 0 : 1;
+        var p = (TemplatePathMatcher) r.pathMatcher();
+        return p.hasWildcard() ? 0 : 1;
     });
     private static final Comparator<ScxRouteHandler> GROUPS_COMPARATOR = Comparator.comparing(r -> {
-        var p = (PathMatcherImpl) r.pathMatcher();
-        return p.groups() == null ? 0 : p.groups().size();
+        var p = (TemplatePathMatcher) r.pathMatcher();
+        return p.paramCount();
     });
     private static final Comparator<ScxRouteHandler> ORDER_COMPARATOR = Comparator.comparing(ScxRouteHandler::order);
     private static final Pattern RE_TOKEN_SEARCH = Pattern.compile(":(\\w+)");
@@ -92,8 +96,10 @@ public final class RouteRegistrar {
     /// @param c a
     /// @return a
     public static boolean isRoute(Class<?> c) {
-        return c.isAnnotationPresent(ScxRoute.class) && //拥有注解
-                ClassUtils.isNormalClass(c); // 是一个普通的类 (不是接口, 不是抽象类) ; 此处不要求有必须有无参构造函数 因为此类的创建会由 beanFactory 进行处理
+        // todo 待优化
+//        return c.isAnnotationPresent(ScxRoute.class) && //拥有注解
+//                ClassUtils.isNormalClass(c); // 是一个普通的类 (不是接口, 不是抽象类) ; 此处不要求有必须有无参构造函数 因为此类的创建会由 beanFactory 进行处理
+        return false;
     }
 
     /// 判断是否为 ScxMapping 方法
@@ -139,12 +145,12 @@ public final class RouteRegistrar {
     private static void checkRouteExists(List<ScxRouteHandler> handlers) {
         var m = new MultiMap<NormalPathInfo, ScxRouteHandler>();
         for (var handler : handlers) {
-            var p = (PathMatcherImpl) handler.pathMatcher();
-            var key = p.pattern() != null ? p.pattern().toString() : p.path();
-            if (handler.methods().isEmpty()) {
+            var p = (TemplatePathMatcher) handler.pathMatcher();
+            var key = p.template() != null ? p.template().toString() : p.template();
+            if (handler.methods.isEmpty()) {
                 m.add(new NormalPathInfo("*", key), handler);
             } else {
-                for (var httpMethod : handler.methods()) {
+                for (var httpMethod : handler.methods) {
                     m.add(new NormalPathInfo(httpMethod.name(), key), handler);
                 }
             }
@@ -154,7 +160,7 @@ public final class RouteRegistrar {
             if (v.size() > 1) { //具有多个路由
                 var content = v.stream().map(c -> "\t" + c.clazz.getName() + " : " + c.method.name()).collect(Collectors.joining(System.lineSeparator()));
                 logger.log(WARNING, "检测到重复的路由!!! {0} --> \"{1}\" , 相关 class 及 方法 如下 ▼" + System.lineSeparator() + "{2}",
-                        k.httpMethod(), getPatternUrl(v.get(0).path()), content);
+                        k.httpMethod(), getPatternUrl(v.get(0).path), content);
             }
         });
     }

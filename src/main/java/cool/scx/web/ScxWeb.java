@@ -15,6 +15,7 @@ import cool.scx.web.parameter_handler.from_upload.FromUploadParameterHandlerBuil
 import cool.scx.web.parameter_handler.last.LastParameterHandlerBuilder;
 import cool.scx.web.return_value_handler.*;
 import cool.scx.web.template.ScxTemplateHandler;
+import dev.scx.http.exception.BadRequestException;
 import dev.scx.http.routing.Router;
 import dev.scx.http.routing.RoutingContext;
 import dev.scx.reflect.ParameterInfo;

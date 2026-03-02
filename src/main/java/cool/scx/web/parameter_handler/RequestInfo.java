@@ -1,14 +1,19 @@
 package cool.scx.web.parameter_handler;
 
 import dev.scx.collection.multi_map.MultiMap;
+import dev.scx.format.FormatToNodeException;
 import dev.scx.http.media.multi_part.MultiPartPart;
 import dev.scx.http.media.multi_part.MultiPartPartImpl;
 import dev.scx.http.media_type.ScxMediaType;
 import dev.scx.http.routing.RoutingContext;
 import dev.scx.node.Node;
 import dev.scx.node.ObjectNode;
+import dev.scx.node.StringNode;
+import dev.scx.serialize.ScxSerialize;
 
 import java.io.IOException;
+
+import static dev.scx.http.media_type.MediaType.*;
 
 /// 封装 RoutingContext 的参数 防止反复取值造成性能损失
 ///
@@ -29,8 +34,8 @@ public final class RequestInfo {
         this.routingContext = ctx;
         this.cachedMultiPart = cachedMultiPart;
         this.contentType = ctx.request().contentType();
-        this.pathParams = (ObjectNode) valueToNode(ctx.pathParams().toMultiValueMap());
-        this.query = (ObjectNode) valueToNode(ctx.request().query().toMultiValueMap());
+        this.pathParams = (ObjectNode) ScxSerialize.objectToNode(ctx.pathMatch().namedCaptures());
+        this.query = (ObjectNode) ScxSerialize.objectToNode(ctx.request().query().toMultiValueMap());
         this.bodyInit = false;
     }
 
@@ -40,13 +45,13 @@ public final class RequestInfo {
     /// @return a
     public static Node tryReadOrTextNode(String str) {
         try { //先尝试以 json 格式进行尝试转换
-            return ScxObject.fromJson(str);
-        } catch (NodeParseException exception) {
+            return ScxSerialize.fromJson(str);
+        } catch (FormatToNodeException exception) {
             try {//再尝试以 xml 的格式进行转换
-                return ScxObject.fromXml(str);
-            } catch (NodeParseException e) {
+                return ScxSerialize.fromXml(str);
+            } catch (FormatToNodeException e) {
                 // json 和 xml 均转换失败 直接存储 为 string
-                return new TextNode(str);
+                return new StringNode(str);
             }
         }
     }

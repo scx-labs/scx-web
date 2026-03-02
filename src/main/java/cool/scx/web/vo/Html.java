@@ -43,15 +43,15 @@ public final class Html implements BaseVo {
     }
 
     public void sendHtmlStr(RoutingContext context) {
-        context.response()
+        context.request().response()
                 .contentType(ScxMediaType.of(TEXT_HTML).charset(UTF_8))
                 .send(htmlStr);
     }
 
     public void sendHtmlPath(RoutingContext context) {
-        context.response()
+        context.request().response()
                 .contentType(ScxMediaType.of(TEXT_HTML).charset(UTF_8))
-                .send(htmlPath);
+                .send(htmlPath.toFile());
     }
 
 }

@@ -1,22 +1,22 @@
 package cool.scx.web;
 
-import cool.scx.common.util.CaseUtils;
-import cool.scx.common.util.URIUtils;
-import cool.scx.function.Function1Void;
-import cool.scx.http.method.HttpMethod;
-import cool.scx.http.method.ScxHttpMethod;
-import cool.scx.http.routing.*;
-import cool.scx.reflect.MethodInfo;
 import cool.scx.web.annotation.ScxRoute;
 import cool.scx.web.parameter_handler.ParameterHandler;
+import dev.scx.function.Function1Void;
+import dev.scx.http.method.HttpMethod;
+import dev.scx.http.method.ScxHttpMethod;
+import dev.scx.http.routing.Route;
+import dev.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.method_matcher.MethodMatcher;
+import dev.scx.http.routing.path_matcher.PathMatcher;
+import dev.scx.http.routing.request_matcher.RequestMatcher;
+import dev.scx.reflect.MethodInfo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
-import static cool.scx.common.constant.AnnotationValues.getRealValue;
 import static cool.scx.web.RouteRegistrar.findScxRouteOrThrow;
 import static cool.scx.web.ScxWeb.ROUTING_CONTEXT_SCOPED_VALUE;
-import static cool.scx.websocket.routing.WebSocketTypeMatcher.NOT_WEB_SOCKET_HANDSHAKE;
 
 /// ScxRouteHandler
 ///
@@ -32,7 +32,7 @@ public final class ScxRouteHandler implements Route, Function1Void<RoutingContex
     private final String path;
     private final Set<HttpMethod> methods;
     private final int order;
-    private final TypeMatcher typeMatcher;
+    private final RequestMatcher typeMatcher;
     private final PathMatcher pathMatcher;
     private final MethodMatcher methodMatcher;
     private final ParameterHandler[] parameterHandlers;
@@ -116,7 +116,7 @@ public final class ScxRouteHandler implements Route, Function1Void<RoutingContex
     }
 
     @Override
-    public TypeMatcher typeMatcher() {
+    public RequestMatcher requestMatcher() {
         return typeMatcher;
     }
 

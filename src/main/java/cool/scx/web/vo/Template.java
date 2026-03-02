@@ -1,7 +1,7 @@
 package cool.scx.web.vo;
 
-import cool.scx.http.media_type.ScxMediaType;
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.http.routing.RoutingContext;
 import cool.scx.web.template.ScxTemplateHandler;
 import freemarker.template.TemplateException;
 
@@ -10,7 +10,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import static cool.scx.http.media_type.MediaType.TEXT_HTML;
+import static dev.scx.http.media_type.MediaType.TEXT_HTML;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /// 模板

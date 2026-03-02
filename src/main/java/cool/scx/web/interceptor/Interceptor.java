@@ -1,6 +1,6 @@
 package cool.scx.web.interceptor;
 
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.RoutingContext;
 import cool.scx.web.ScxRouteHandler;
 
 /// 拦截器

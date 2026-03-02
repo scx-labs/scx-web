@@ -5,8 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static cool.scx.common.constant.AnnotationValues.NULL;
-
 /// 从路径 (Path) 参数
 ///
 /// @author scx567888

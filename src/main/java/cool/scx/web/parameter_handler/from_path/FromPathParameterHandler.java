@@ -1,15 +1,12 @@
 package cool.scx.web.parameter_handler.from_path;
 
-import cool.scx.reflect.ParameterInfo;
-import cool.scx.reflect.TypeInfo;
+import dev.scx.reflect.ParameterInfo;
+import dev.scx.reflect.TypeInfo;
 import cool.scx.web.annotation.FromPath;
 import cool.scx.web.parameter_handler.ParameterHandler;
 import cool.scx.web.parameter_handler.RequestInfo;
 import cool.scx.web.parameter_handler.exception.ParamConvertException;
 import cool.scx.web.parameter_handler.exception.RequiredParamEmptyException;
-
-import static cool.scx.common.constant.AnnotationValues.getRealValue;
-import static cool.scx.object.ScxObject.convertValue;
 
 /// FromPathParameterHandler
 ///

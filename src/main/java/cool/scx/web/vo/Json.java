@@ -1,9 +1,9 @@
 package cool.scx.web.vo;
 
-import cool.scx.http.media_type.ScxMediaType;
-import cool.scx.http.routing.RoutingContext;
+import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.http.routing.RoutingContext;
 
-import static cool.scx.http.media_type.MediaType.APPLICATION_JSON;
+import static dev.scx.http.media_type.MediaType.APPLICATION_JSON;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /// Json 格式的返回值

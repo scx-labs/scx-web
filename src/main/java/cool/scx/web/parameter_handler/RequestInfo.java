@@ -1,20 +1,14 @@
 package cool.scx.web.parameter_handler;
 
-import cool.scx.collections.multi_map.MultiMap;
-import cool.scx.http.media.multi_part.MultiPartPart;
-import cool.scx.http.media.multi_part.MultiPartPartImpl;
-import cool.scx.http.media_type.ScxMediaType;
-import cool.scx.http.routing.RoutingContext;
-import cool.scx.object.ScxObject;
-import cool.scx.object.node.Node;
-import cool.scx.object.node.ObjectNode;
-import cool.scx.object.node.TextNode;
-import cool.scx.object.parser.NodeParseException;
+import dev.scx.collection.multi_map.MultiMap;
+import dev.scx.http.media.multi_part.MultiPartPart;
+import dev.scx.http.media.multi_part.MultiPartPartImpl;
+import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.http.routing.RoutingContext;
+import dev.scx.node.Node;
+import dev.scx.node.ObjectNode;
 
 import java.io.IOException;
-
-import static cool.scx.http.media_type.MediaType.*;
-import static cool.scx.object.ScxObject.valueToNode;
 
 /// 封装 RoutingContext 的参数 防止反复取值造成性能损失
 ///

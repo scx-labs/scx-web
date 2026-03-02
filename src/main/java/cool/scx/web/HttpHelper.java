@@ -1,10 +1,9 @@
 package cool.scx.web;
 
-import cool.scx.http.ScxHttpServerRequest;
-import cool.scx.http.media_type.FileFormat;
-import cool.scx.http.media_type.MediaType;
+import dev.scx.http.ScxHttpServerRequest;
+import dev.scx.http.media_type.FileFormat;
+import dev.scx.http.media_type.MediaType;
 
-import static cool.scx.common.util.StringUtils.notBlank;
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 

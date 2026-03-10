@@ -15,7 +15,8 @@ public final class LastReturnValueHandler implements ReturnValueHandler {
 
     @Override
     public void handle(Object returnValue, RoutingContext routingContext) {
-        routingContext.response().send(returnValue);
+        // todo
+        routingContext.request().response().send(returnValue.toString());
     }
 
 }

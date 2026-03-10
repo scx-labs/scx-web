@@ -5,6 +5,8 @@ import dev.scx.http.routing.RoutingContext;
 import dev.scx.http.status_code.ScxHttpStatusCode;
 
 import static dev.scx.http.headers.HttpHeaderName.LOCATION;
+import static dev.scx.http.status_code.HttpStatusCode.FOUND;
+import static dev.scx.http.status_code.HttpStatusCode.MOVED_PERMANENTLY;
 
 /// 重定向
 ///
@@ -37,12 +39,12 @@ public final class Redirection implements BaseVo {
     }
 
     public void handle(ScxHttpServerResponse response) {
-        response.setHeader(LOCATION, location).status(status).send();
+        response.setHeader(LOCATION, location).statusCode(status).send();
     }
 
     @Override
     public void apply(RoutingContext routingContext) {
-        handle(routingContext.response());
+        handle(routingContext.request().response());
     }
 
 }

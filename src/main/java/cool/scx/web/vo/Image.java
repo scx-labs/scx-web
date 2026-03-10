@@ -7,6 +7,7 @@ import dev.scx.http.media_type.FileFormat;
 import dev.scx.http.media_type.MediaType;
 import dev.scx.http.media_type.ScxMediaType;
 import dev.scx.http.routing.RoutingContext;
+import dev.scx.http.routing.x.static_files.StaticFilesSupport;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.AbsoluteSize;
 import net.coobird.thumbnailator.geometry.Position;
@@ -16,8 +17,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Objects;
 
 import static dev.scx.http.headers.HttpHeaderName.ACCEPT_RANGES;
@@ -61,7 +64,7 @@ public abstract class Image implements BaseVo {
     @Override
     public final void apply(RoutingContext context) throws BadRequestException {
         //设置缓存 减少服务器压力
-        context.response()
+        context.request().response()
                 .setHeader(CACHE_CONTROL, "public,immutable,max-age=2628000")
                 .setHeader(ACCEPT_RANGES, "bytes");
         imageHandler(context);
@@ -98,7 +101,7 @@ public abstract class Image implements BaseVo {
 
         @Override
         public void imageHandler(RoutingContext context) {
-            context.response().contentType(IMAGE_PNG).send(buffer);
+            context.request().response().contentType(IMAGE_PNG).send(buffer);
         }
 
     }
@@ -114,7 +117,13 @@ public abstract class Image implements BaseVo {
 
         @Override
         public void imageHandler(RoutingContext context) {
-            StaticHelper.sendStatic(filePath, context);
+            try {
+                BasicFileAttributes basicFileAttributes = Files.readAttributes(filePath, BasicFileAttributes.class);
+                StaticFilesSupport.sendFile(filePath.toFile(),basicFileAttributes, context.request());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
     }
@@ -161,7 +170,7 @@ public abstract class Image implements BaseVo {
 
         @Override
         public void imageHandler(RoutingContext context) {
-            context.response().contentType(contentType).send(buffer);
+            context.request().response().contentType(contentType).send(buffer);
         }
 
     }

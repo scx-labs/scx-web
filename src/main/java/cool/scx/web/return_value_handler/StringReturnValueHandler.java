@@ -16,7 +16,7 @@ public final class StringReturnValueHandler implements ReturnValueHandler {
     @Override
     public void handle(Object returnValue, RoutingContext routingContext) {
         if (returnValue instanceof String str) {
-            routingContext.response().send(str);
+            routingContext.request().response().send(str);
         } else {
             throw new IllegalArgumentException("参数不是 String 类型 !!! " + returnValue.getClass());
         }

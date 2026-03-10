@@ -64,12 +64,12 @@ public final class RequestInfo {
         bodyInit = true;
         // 除了 MULTIPART_FORM_DATA 其余全部转为 JsonNode 的形式方便后续使用
         if (APPLICATION_JSON.equalsIgnoreParams(contentType) || APPLICATION_XML.equalsIgnoreParams(contentType)) {
-            this.body = ctx.request().body().asTree();
+//            this.body = ctx.request().body().asTree();
             return;
         }
         if (APPLICATION_X_WWW_FORM_URLENCODED.equalsIgnoreParams(contentType)) {
-            var formParams = ctx.request().body().asFormParams();
-            this.body = valueToNode(formParams.toMultiValueMap());
+//            var formParams = ctx.request().body().asFormParams();
+//            this.body = valueToNode(formParams.toMultiValueMap());
             return;
         }
         if (MULTIPART_FORM_DATA.equalsIgnoreParams(contentType)) {
@@ -77,26 +77,26 @@ public final class RequestInfo {
             var m = new MultiMap<String, String>();
             var f = new MultiMap<String, MultiPartPart>();
             //文件和非文件
-            var multiPart = ctx.request().body().asMultiPart();
-            for (var multiPartPart : multiPart) {
+//            var multiPart = ctx.request().body().asMultiPart();
+//            for (var multiPartPart : multiPart) {
                 //没有文件名我们就当成 空文件
-                if (multiPartPart.filename() == null) {
-                    m.add(multiPartPart.name(), multiPartPart.asString());
-                }
-                try {
+//                if (multiPartPart.filename() == null) {
+//                    m.add(multiPartPart.name(), multiPartPart.asString());
+//                }
+//                try {
                     //这里我们需要将流式的读取到内存中
-                    var bytes = multiPartPart.inputStream().readAllBytes();
-                    f.add(multiPartPart.name(), new MultiPartPartImpl().headers(multiPartPart.headers()).body(bytes));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+//                    var bytes = multiPartPart.inputStream().readAllBytes();
+//                    f.add(multiPartPart.name(), new MultiPartPartImpl().headers(multiPartPart.headers()).body(bytes));
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
-            this.body = valueToNode(m.toMultiValueMap());
-            this.uploadFiles = f;
+//            this.body = valueToNode(m.toMultiValueMap());
+//            this.uploadFiles = f;
             return;
-        }
-        var string = ctx.request().body().asString();
-        this.body = string != null ? tryReadOrTextNode(string) : null;
+//        }
+//        var string = ctx.request().body().asString();
+//        this.body = string != null ? tryReadOrTextNode(string) : null;
     }
 
     public ObjectNode pathParams() {

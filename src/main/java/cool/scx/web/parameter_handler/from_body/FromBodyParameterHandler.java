@@ -8,6 +8,8 @@ import cool.scx.web.parameter_handler.RequestInfo;
 import cool.scx.web.parameter_handler.exception.ParamConvertException;
 import cool.scx.web.parameter_handler.exception.RequiredParamEmptyException;
 
+import static dev.scx.constant.AnnotationValues.getRealValue;
+
 /// FromBodyParameterHandler
 ///
 /// @author scx567888
@@ -30,24 +32,25 @@ public final class FromBodyParameterHandler implements ParameterHandler {
     }
 
     private static Object fromBody(String name, boolean useAllBody, boolean required, TypeInfo javaType, RequestInfo info) throws RequiredParamEmptyException, ParamConvertException {
-        var tempValue = useAllBody ? info.body() : NodeHelper.get(info.body(), name);
-        // 为了提高性能这里提前做一次校验
-        if (tempValue == null || tempValue.isNull()) {
-            if (required) {
-                throw new RequiredParamEmptyException("必填参数不能为空 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "]");
-            }
-            return null;
-        }
-        Object o;
-        try {
-            o = convertValue(tempValue, javaType);
-        } catch (Exception e) {
-            throw new ParamConvertException("参数类型转换异常 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "] , 详细错误信息 : " + e.getMessage());
-        }
-        if (o == null && required) {
-            throw new RequiredParamEmptyException("必填参数不能为空 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "]");
-        }
-        return o;
+//        var tempValue = useAllBody ? info.body() : NodeHelper.get(info.body(), name);
+//        // 为了提高性能这里提前做一次校验
+//        if (tempValue == null || tempValue.isNull()) {
+//            if (required) {
+//                throw new RequiredParamEmptyException("必填参数不能为空 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "]");
+//            }
+//            return null;
+//        }
+//        Object o;
+//        try {
+//            o = convertValue(tempValue, javaType);
+//        } catch (Exception e) {
+//            throw new ParamConvertException("参数类型转换异常 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "] , 详细错误信息 : " + e.getMessage());
+//        }
+//        if (o == null && required) {
+//            throw new RequiredParamEmptyException("必填参数不能为空 !!! 参数名称 [" + name + "] , 参数来源 [FromBody, useAllBody=" + useAllBody + "] , 参数类型 [" + javaType + "]");
+//        }
+//        return o;
+        return null;
     }
 
     @Override

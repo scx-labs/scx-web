@@ -5,6 +5,7 @@ import dev.scx.http.ScxHttpServerResponse;
 import dev.scx.http.headers.ScxHttpHeaders;
 import dev.scx.http.headers.cookie.Cookies;
 import dev.scx.http.routing.RoutingContext;
+import dev.scx.io.ByteInput;
 import dev.scx.reflect.ParameterInfo;
 import cool.scx.web.parameter_handler.ParameterHandler;
 import cool.scx.web.parameter_handler.ParameterHandlerBuilder;
@@ -27,12 +28,12 @@ public final class FromContextParameterHandlerBuilder implements ParameterHandle
             return (requestInfo) -> requestInfo.routingContext().request();
         }
         if (rawClass == ScxHttpServerResponse.class) {
-            return (requestInfo) -> requestInfo.routingContext().response();
+            return (requestInfo) -> requestInfo.routingContext().request().response();
         }
         if (rawClass == ScxHttpHeaders.class) {
             return (requestInfo) -> requestInfo.routingContext().request().headers();
         }
-        if (rawClass == ScxHttpBody.class) {
+        if (rawClass == ByteInput.class) {
             return (requestInfo) -> requestInfo.routingContext().request().body();
         }
         if (rawClass == Cookies.class) {

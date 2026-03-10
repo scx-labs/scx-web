@@ -1,6 +1,7 @@
 package cool.scx.web.vo;
 
 import dev.scx.http.routing.RoutingContext;
+import dev.scx.serialize.ScxSerialize;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -56,17 +57,18 @@ public abstract class Result implements BaseVo {
 
     @Override
     public void apply(RoutingContext context) {
-        context.response().send(body());
+        //todo
+        context.request().response().send(body().toString());
     }
 
     public abstract Body<?> body();
 
     public String toXml() {
-        return ScxObject.toXml(body());
+        return ScxSerialize.toXml(body());
     }
 
     public String toJson() {
-        return ScxObject.toJson(body());
+        return ScxSerialize.toJson(body());
     }
 
     public record Body<T>(String message, T data) {

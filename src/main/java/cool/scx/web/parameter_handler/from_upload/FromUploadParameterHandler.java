@@ -8,9 +8,11 @@ import cool.scx.web.annotation.FromUpload;
 import cool.scx.web.parameter_handler.ParameterHandler;
 import cool.scx.web.parameter_handler.RequestInfo;
 import cool.scx.web.parameter_handler.exception.RequiredParamEmptyException;
+import dev.scx.serialize.ScxSerialize;
 
 import java.util.Collection;
 
+import static dev.scx.constant.AnnotationValues.getRealValue;
 import static java.util.Collections.addAll;
 
 /// 处理 FileUpload 类型参数
@@ -80,7 +82,7 @@ public final class FromUploadParameterHandler implements ParameterHandler {
         if (isCollection) {
             //这里我们无法确定具体的类型 所以使用 ObjectUtils 帮我们创建一个
             @SuppressWarnings("unchecked")
-            var list = (Collection<Object>) convertValue(new Object[]{}, parameter.parameterType());// todo 这里正确吗?
+            var list = (Collection<Object>) ScxSerialize.convertObject(new Object[]{}, parameter.parameterType());// todo 这里正确吗?
             addAll(list, v);
             return list;
         } else {

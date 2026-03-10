@@ -43,7 +43,7 @@ public final class Template {
         var sw = new StringWriter();
         var template = templateHandler.getTemplate(templatePath);
         template.process(dataMap, sw);
-        context.response()
+        context.request().response()
                 .contentType(ScxMediaType.of(TEXT_HTML).charset(UTF_8))
                 .send(sw.toString());
     }

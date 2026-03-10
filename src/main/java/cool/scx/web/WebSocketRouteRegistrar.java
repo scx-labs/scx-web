@@ -18,7 +18,8 @@ import java.util.List;
 /// @version 0.0.1
 public final class WebSocketRouteRegistrar {
 
-    private static final Comparator<Route> orderComparator = Comparator.comparing(Route::order);
+//    private static final Comparator<Route> orderComparator = Comparator.comparing(Route::order);
+    private static final Comparator<Route> orderComparator = null;
     private final ScxWeb scxWeb;
 
     public WebSocketRouteRegistrar(ScxWeb scxWeb) {
@@ -34,12 +35,13 @@ public final class WebSocketRouteRegistrar {
     public static Route createWebSocketRoute(BaseWebSocketHandler o) {
         var c = o.getClass();
         var scxWebSocketMapping = c.getAnnotation(ScxWebSocketRoute.class);
-        var path = URIUtils.addSlashStart(URIUtils.join(scxWebSocketMapping.value()));
-        var order = scxWebSocketMapping.order();
+//        var path = URIUtils.addSlashStart(URIUtils.join(scxWebSocketMapping.value()));
+//        var order = scxWebSocketMapping.order();
         //todo 需要重新设计
-        return Route.of().type(WEB_SOCKET_HANDSHAKE).order(order).path(path).handler((d) -> {
-            o.onHandshakeRequest(d.request());
-        });
+//        return Route.of().type(WEB_SOCKET_HANDSHAKE).order(order).path(path).handler((d) -> {
+//            o.onHandshakeRequest(d.request());
+//        });
+        return null;
     }
 
     public static List<BaseWebSocketHandler> filterObject(Object... classList) {
@@ -58,9 +60,10 @@ public final class WebSocketRouteRegistrar {
     }
 
     public static boolean isWebSocketRouteClass(Class<?> c) {
-        return c.isAnnotationPresent(ScxWebSocketRoute.class) && // 拥有注解
-                ClassUtils.isNormalClass(c) && // 是一个普通的类 (不是接口, 不是抽象类) ; 此处不要求有必须有无参构造函数 因为此类的创建会由 beanFactory 进行处理
-                BaseWebSocketHandler.class.isAssignableFrom(c); // 继承自 BaseWebSocketHandler
+//        return c.isAnnotationPresent(ScxWebSocketRoute.class) && // 拥有注解
+//                ClassUtils.isNormalClass(c) && // 是一个普通的类 (不是接口, 不是抽象类) ; 此处不要求有必须有无参构造函数 因为此类的创建会由 beanFactory 进行处理
+//                BaseWebSocketHandler.class.isAssignableFrom(c); // 继承自 BaseWebSocketHandler
+        return false;
     }
 
     private static List<Route> sortedWebSocketRoutes(List<Route> list) {

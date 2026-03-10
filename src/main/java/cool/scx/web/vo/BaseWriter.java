@@ -4,7 +4,6 @@ import dev.scx.http.ScxHttpServerResponse;
 import dev.scx.http.media_type.MediaType;
 import dev.scx.http.media_type.ScxMediaType;
 import dev.scx.http.routing.RoutingContext;
-import cool.scx.web.handler.StaticHelper;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -61,12 +60,12 @@ class BaseWriter implements BaseVo {
 
     @Override
     public final void apply(RoutingContext context) {
-        var response = context.response();
+        var response = context.request().response();
         response.setHeader(CONTENT_DISPOSITION, contentDisposition);
         fillContentType(response, contentType);
         switch (type) {
             case BYTE_ARRAY -> response.send(this.bytes);
-            case PATH -> StaticHelper.sendStatic(this.path, context);
+//            case PATH -> StaticHelper.sendStatic(this.path, context);
             case INPUT_STREAM -> response.send(inputStream);
         }
     }

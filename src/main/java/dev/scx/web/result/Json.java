@@ -1,4 +1,4 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
 import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.media_type.ScxMediaType;
@@ -13,7 +13,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Json implements BaseVo {
+public final class Json implements WebResult {
 
     private final Object data;
     private final ToJsonOptions toJsonOptions;

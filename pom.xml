@@ -71,20 +71,8 @@
 
         <dependency>
             <groupId>dev.scx</groupId>
-            <artifactId>scx-http-routing</artifactId>
-            <version>${scx-http-routing.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.scx</groupId>
-            <artifactId>scx-reflect</artifactId>
-            <version>${scx-reflect.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.scx</groupId>
-            <artifactId>scx-serialize</artifactId>
-            <version>${scx-serialize.version}</version>
+            <artifactId>scx-http-routing-x</artifactId>
+            <version>${scx-http-routing-x.version}</version>
         </dependency>
 
         <dependency>
@@ -101,14 +89,8 @@
 
         <dependency>
             <groupId>dev.scx</groupId>
-            <artifactId>scx-http-routing-x</artifactId>
-            <version>${scx-http-routing-x.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.scx</groupId>
-            <artifactId>scx-http-x</artifactId>
-            <version>${scx-http-x.version}</version>
+            <artifactId>scx-serialize</artifactId>
+            <version>${scx-serialize.version}</version>
         </dependency>
 
         <!-- todo 应该存在吗? -->
@@ -138,13 +120,10 @@
     <properties>
 
         <!-- *********************** 以下为依赖包版本 *********************** -->
-        <scx-http-routing.version>0.1.1</scx-http-routing.version>
-        <scx-reflect.version>0.0.1</scx-reflect.version>
-        <scx-serialize.version>0.1.1</scx-serialize.version>
-        <scx-websocket-x.version>0.2.1</scx-websocket-x.version>
-        <scx-constant.version>0.0.1</scx-constant.version>
         <scx-http-routing-x.version>0.0.1</scx-http-routing-x.version>
-        <scx-http-x.version>0.3.3</scx-http-x.version>
+        <scx-websocket-x.version>0.2.3</scx-websocket-x.version>
+        <scx-constant.version>0.0.1</scx-constant.version>
+        <scx-serialize.version>0.1.1</scx-serialize.version>
         <freemarker.version>2.3.34</freemarker.version>
         <thumbnailator.version>0.4.21</thumbnailator.version>
         <testng.version>7.11.0</testng.version>

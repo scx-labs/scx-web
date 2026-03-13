@@ -141,7 +141,7 @@
         <scx-http-routing.version>0.1.1</scx-http-routing.version>
         <scx-reflect.version>0.0.1</scx-reflect.version>
         <scx-serialize.version>0.1.1</scx-serialize.version>
-        <scx-websocket-x.version>0.2.1</scx-websocket-x.version>
+        <scx-websocket-x.version>0.2.3</scx-websocket-x.version>
         <scx-constant.version>0.0.1</scx-constant.version>
         <scx-http-routing-x.version>0.0.1</scx-http-routing-x.version>
         <scx-http-x.version>0.3.3</scx-http-x.version>

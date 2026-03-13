@@ -123,7 +123,7 @@
         <scx-http-routing-x.version>0.0.1</scx-http-routing-x.version>
         <scx-websocket-x.version>0.2.3</scx-websocket-x.version>
         <scx-constant.version>0.0.1</scx-constant.version>
-        <scx-serialize.version>0.1.1</scx-serialize.version>
+        <scx-serialize.version>0.1.2</scx-serialize.version>
         <freemarker.version>2.3.34</freemarker.version>
         <thumbnailator.version>0.4.21</thumbnailator.version>
         <testng.version>7.11.0</testng.version>

@@ -1,6 +1,7 @@
 package dev.scx.web.vo;
 
 import dev.scx.http.ScxHttpServerRequest;
+import dev.scx.web.WebContext;
 
 /// BaseVo 接口
 ///
@@ -8,6 +9,6 @@ import dev.scx.http.ScxHttpServerRequest;
 /// @version 0.0.1
 public interface BaseVo {
 
-    void apply(ScxHttpServerRequest request) throws Throwable;
+    void apply(ScxHttpServerRequest request, WebContext webContext) throws Throwable;
 
 }

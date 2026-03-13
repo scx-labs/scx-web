@@ -2,7 +2,8 @@ package dev.scx.web.vo;
 
 import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.media_type.ScxMediaType;
-import dev.scx.http.routing.RoutingContext;
+import dev.scx.serialize.ToJsonOptions;
+import dev.scx.web.WebContext;
 
 import static dev.scx.http.media_type.MediaType.APPLICATION_JSON;
 import static dev.scx.serialize.ScxSerialize.toJson;
@@ -15,20 +16,26 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public final class Json implements BaseVo {
 
     private final Object data;
+    private final ToJsonOptions toJsonOptions;
 
-    private Json(Object data) {
+    private Json(Object data, ToJsonOptions toJsonOptions) {
         this.data = data;
+        this.toJsonOptions = toJsonOptions;
     }
 
     public static Json of(Object data) {
-        return new Json(data);
+        return new Json(data, null);
+    }
+
+    public static Json of(Object data, ToJsonOptions toJsonOptions) {
+        return new Json(data, toJsonOptions);
     }
 
     @Override
-    public void apply(ScxHttpServerRequest request) {
+    public void apply(ScxHttpServerRequest request, WebContext webContext) {
         request.response()
-                .contentType(ScxMediaType.of(APPLICATION_JSON).charset(UTF_8))
-                .send(toJson(data));
+            .contentType(ScxMediaType.of(APPLICATION_JSON).charset(UTF_8))
+            .send(toJson(data, toJsonOptions != null ? toJsonOptions : webContext.toJsonOptions()));
     }
 
 }

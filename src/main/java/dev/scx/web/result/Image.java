@@ -1,4 +1,4 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
 import dev.scx.http.exception.BadRequestException;
 import dev.scx.http.exception.NotFoundException;
@@ -31,7 +31,7 @@ import static dev.scx.http.media_type.MediaType.IMAGE_PNG;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public abstract class Image implements BaseVo {
+public abstract class Image implements WebResult {
 
     /// 用来校验 file 是否可用
     ///

@@ -2,7 +2,7 @@ package dev.scx.web.test;
 
 import dev.scx.http.exception.ForbiddenException;
 import dev.scx.web.annotation.ScxRoute;
-import dev.scx.web.vo.Result;
+import dev.scx.web.result.Result;
 
 @ScxRoute
 public class HelloWorldController {

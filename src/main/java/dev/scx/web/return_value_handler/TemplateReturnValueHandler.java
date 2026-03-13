@@ -2,7 +2,7 @@ package dev.scx.web.return_value_handler;
 
 import dev.scx.http.routing.RoutingContext;
 import dev.scx.web.template.ScxTemplateHandler;
-import dev.scx.web.vo.Template;
+import dev.scx.web.result.Template;
 
 /// 用于渲染 freemarker
 ///

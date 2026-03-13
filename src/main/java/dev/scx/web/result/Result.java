@@ -1,4 +1,4 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
 import dev.scx.http.routing.RoutingContext;
 import dev.scx.serialize.ScxSerialize;
@@ -10,7 +10,7 @@ import java.util.Map;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public abstract class Result implements BaseVo {
+public abstract class Result implements WebResult {
 
     /// 操作成功
     ///

@@ -1,4 +1,4 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -10,7 +10,7 @@ import static dev.scx.web.HttpHelper.getMediaTypeByFileName;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Download extends BaseWriter {
+public final class Download extends Binary {
 
     private Download(InputStream inputStream, String downloadName) {
         super(inputStream, getMediaTypeByFileName(downloadName), getDownloadContentDisposition(downloadName));

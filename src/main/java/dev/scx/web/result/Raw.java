@@ -1,4 +1,4 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
 import dev.scx.http.media_type.FileFormat;
 
@@ -9,7 +9,7 @@ import java.nio.file.Path;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Raw extends BaseWriter {
+public final class Raw extends Binary {
 
     private Raw(InputStream inputStream, FileFormat fileFormat) {
         super(inputStream, fileFormat.mediaType(), "inline");

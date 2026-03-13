@@ -1,11 +1,9 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
+import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.media_type.ScxMediaType;
-import dev.scx.http.routing.RoutingContext;
-import dev.scx.web.template.ScxTemplateHandler;
-import freemarker.template.TemplateException;
+import dev.scx.web.WebContext;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,21 +11,20 @@ import java.util.Map;
 import static dev.scx.http.media_type.MediaType.TEXT_HTML;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-/// 模板
+/// Template
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Template {
+public final class Template implements WebResult {
 
     private final String templatePath;
-
     private final Map<String, Object> dataMap = new HashMap<>();
 
     private Template(String templatePath) {
         this.templatePath = templatePath;
     }
 
-    public static Template of(String templatePath) throws IOException {
+    public static Template of(String templatePath) {
         return new Template(templatePath);
     }
 
@@ -36,16 +33,20 @@ public final class Template {
         return this;
     }
 
-    public void accept(RoutingContext context, ScxTemplateHandler templateHandler) throws TemplateException, IOException {
+    @Override
+    public void apply(ScxHttpServerRequest request, WebContext webContext) throws Throwable {
+        var templateHandler = webContext.templateHandler();
         if (templateHandler == null) {
-            throw new NullPointerException("handler 不能为空 !!!");
+            throw new IllegalStateException("No templateHandler configured in WebContext");
         }
+
         var sw = new StringWriter();
         var template = templateHandler.getTemplate(templatePath);
         template.process(dataMap, sw);
-        context.request().response()
-                .contentType(ScxMediaType.of(TEXT_HTML).charset(UTF_8))
-                .send(sw.toString());
+
+        request.response()
+            .contentType(ScxMediaType.of(TEXT_HTML).charset(UTF_8))
+            .send(sw.toString());
     }
 
 }

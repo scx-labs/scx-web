@@ -1,0 +1,12 @@
+package dev.scx.web.vo;
+
+import dev.scx.function.Function1Void;
+import dev.scx.http.routing.RoutingContext;
+
+/// BaseVo 接口
+///
+/// @author scx567888
+/// @version 0.0.1
+public interface BaseVo extends Function1Void<RoutingContext, Exception> {
+
+}

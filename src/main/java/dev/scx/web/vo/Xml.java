@@ -2,6 +2,8 @@ package dev.scx.web.vo;
 
 import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.media_type.ScxMediaType;
+import dev.scx.serialize.ToXmlOptions;
+import dev.scx.web.WebContext;
 
 import static dev.scx.http.media_type.MediaType.APPLICATION_XML;
 import static dev.scx.serialize.ScxSerialize.toXml;
@@ -14,20 +16,26 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public final class Xml implements BaseVo {
 
     private final Object data;
+    private final ToXmlOptions toXmlOptions;
 
-    private Xml(Object data) {
+    private Xml(Object data, ToXmlOptions toXmlOptions) {
         this.data = data;
+        this.toXmlOptions = toXmlOptions;
     }
 
     public static Xml of(Object data) {
-        return new Xml(data);
+        return new Xml(data, null);
+    }
+
+    public static Xml of(Object data, ToXmlOptions toXmlOptions) {
+        return new Xml(data, toXmlOptions);
     }
 
     @Override
-    public void apply(ScxHttpServerRequest request) {
+    public void apply(ScxHttpServerRequest request, WebContext webContext) {
         request.response()
             .contentType(ScxMediaType.of(APPLICATION_XML).charset(UTF_8))
-            .send(toXml(data));
+            .send(toXml(data,toXmlOptions != null ? toXmlOptions : webContext.toXmlOptions()));
     }
 
 }

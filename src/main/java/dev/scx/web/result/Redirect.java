@@ -12,12 +12,12 @@ import static dev.scx.http.status_code.HttpStatusCode.MOVED_PERMANENTLY;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Redirection implements WebResult {
+public final class Redirect implements WebResult {
 
     private final String location;
     private final ScxHttpStatusCode status;
 
-    private Redirection(String location, ScxHttpStatusCode status) {
+    private Redirect(String location, ScxHttpStatusCode status) {
         this.location = location;
         this.status = status;
     }
@@ -26,16 +26,16 @@ public final class Redirection implements WebResult {
     ///
     /// @param location 重定向地址
     /// @return r
-    public static Redirection ofPermanent(String location) {
-        return new Redirection(location, MOVED_PERMANENTLY);
+    public static Redirect ofPermanent(String location) {
+        return new Redirect(location, MOVED_PERMANENTLY);
     }
 
     /// 临时重定向
     ///
     /// @param location 重定向地址
     /// @return r
-    public static Redirection ofTemporary(String location) {
-        return new Redirection(location, FOUND);
+    public static Redirect ofTemporary(String location) {
+        return new Redirect(location, FOUND);
     }
 
     @Override

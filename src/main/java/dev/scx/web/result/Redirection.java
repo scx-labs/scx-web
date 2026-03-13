@@ -1,8 +1,8 @@
-package dev.scx.web.vo;
+package dev.scx.web.result;
 
-import dev.scx.http.ScxHttpServerResponse;
-import dev.scx.http.routing.RoutingContext;
+import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.status_code.ScxHttpStatusCode;
+import dev.scx.web.WebContext;
 
 import static dev.scx.http.headers.HttpHeaderName.LOCATION;
 import static dev.scx.http.status_code.HttpStatusCode.FOUND;
@@ -12,7 +12,7 @@ import static dev.scx.http.status_code.HttpStatusCode.MOVED_PERMANENTLY;
 ///
 /// @author scx567888
 /// @version 0.0.1
-public final class Redirection implements BaseVo {
+public final class Redirection implements WebResult {
 
     private final String location;
     private final ScxHttpStatusCode status;
@@ -38,13 +38,9 @@ public final class Redirection implements BaseVo {
         return new Redirection(location, FOUND);
     }
 
-    public void handle(ScxHttpServerResponse response) {
-        response.setHeader(LOCATION, location).statusCode(status).send();
-    }
-
     @Override
-    public void apply(RoutingContext routingContext) {
-        handle(routingContext.request().response());
+    public void apply(ScxHttpServerRequest request, WebContext webContext) throws Throwable {
+        request.response().setHeader(LOCATION, location).statusCode(status).send();
     }
 
 }

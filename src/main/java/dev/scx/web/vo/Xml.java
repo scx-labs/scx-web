@@ -1,9 +1,10 @@
 package dev.scx.web.vo;
 
+import dev.scx.http.ScxHttpServerRequest;
 import dev.scx.http.media_type.ScxMediaType;
-import dev.scx.http.routing.RoutingContext;
 
 import static dev.scx.http.media_type.MediaType.APPLICATION_XML;
+import static dev.scx.serialize.ScxSerialize.toXml;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /// Xml 格式的返回值
@@ -23,11 +24,10 @@ public final class Xml implements BaseVo {
     }
 
     @Override
-    public void apply(RoutingContext context) {
-        // todo
-        context.request().response()
-                .contentType(ScxMediaType.of(APPLICATION_XML).charset(UTF_8))
-                .send(data.toString());
+    public void apply(ScxHttpServerRequest request) {
+        request.response()
+            .contentType(ScxMediaType.of(APPLICATION_XML).charset(UTF_8))
+            .send(toXml(data));
     }
 
 }
